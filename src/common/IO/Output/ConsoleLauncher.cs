@@ -90,7 +90,7 @@ namespace Microsoft.BridgeToKubernetes.Common.IO.Output
             StringBuilder b = new StringBuilder();
             foreach (var v in envVars)
             {
-                b.AppendLine($"export {v.Key}={v.Value}");
+                b.AppendLine($"export {v.Key}='{v.Value.Replace("'","'\\''")}'");
             }
             File.WriteAllText(scriptCmd, b.ToString());
             _log.Verbose($"Script {scriptCmd} created.");
